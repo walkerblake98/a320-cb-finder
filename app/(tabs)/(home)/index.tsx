@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: 20,
-    paddingTop: 16,
+    paddingTop: 8,
     paddingBottom: 12,
     backgroundColor: colors.card,
     borderBottomWidth: 1,
