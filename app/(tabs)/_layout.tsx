@@ -33,9 +33,11 @@ export default function TabLayout() {
     setSelectedTab(value);
     
     if (value === 'info') {
-      router.push('/(tabs)/profile');
+      // Use replace instead of push to prevent stacking multiple screens
+      router.replace('/(tabs)/profile');
     } else if (value === 'search') {
-      router.push('/(tabs)/(home)/');
+      // Use replace instead of push to prevent stacking multiple screens
+      router.replace('/(tabs)/(home)/');
     }
   };
 
