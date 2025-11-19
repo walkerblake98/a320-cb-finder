@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Stack, useRouter, usePathname } from 'expo-router';
+import { Stack, useRouter, usePathname, useSegments } from 'expo-router';
 import SegmentedControl, { SegmentOption } from '@/components/SegmentedControl';
 import { colors } from '@/styles/commonStyles';
 
 export default function TabLayout() {
   const router = useRouter();
   const pathname = usePathname();
+  const segments = useSegments();
   const [selectedTab, setSelectedTab] = useState('info');
 
   const tabs: SegmentOption[] = [
@@ -15,24 +16,22 @@ export default function TabLayout() {
     { label: 'Search', value: 'search' },
   ];
 
+  // Update selected tab based on current route
   useEffect(() => {
     console.log('Current pathname:', pathname);
-    if (pathname.includes('/(home)')) {
+    console.log('Current segments:', segments);
+    
+    if (pathname.includes('/(home)') || pathname.includes('/home')) {
       setSelectedTab('search');
     } else if (pathname.includes('/profile')) {
       setSelectedTab('info');
     }
-  }, [pathname]);
-
-  useEffect(() => {
-    // Ensure we start on the Info page
-    console.log('Initial navigation to Info page');
-    router.replace('/(tabs)/profile');
-  }, []);
+  }, [pathname, segments]);
 
   const handleTabChange = (value: string) => {
     console.log('Tab changed to:', value);
     setSelectedTab(value);
+    
     if (value === 'info') {
       router.push('/(tabs)/profile');
     } else if (value === 'search') {
@@ -54,10 +53,9 @@ export default function TabLayout() {
           headerShown: false,
           animation: 'fade',
         }}
-        initialRouteName="profile"
       >
-        <Stack.Screen key="profile" name="profile" />
-        <Stack.Screen key="home" name="(home)" />
+        <Stack.Screen name="profile" />
+        <Stack.Screen name="(home)" />
       </Stack>
     </View>
   );

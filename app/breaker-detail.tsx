@@ -9,6 +9,8 @@ export default function BreakerDetailScreen() {
   const params = useLocalSearchParams();
   const { name, panel, row, col, description } = params;
 
+  console.log('Breaker detail params:', params);
+
   const panelInfo = panels.find((p) => p.name === panel);
 
   const parseCoordinates = (rowStr: string, colStr: string) => {
@@ -21,11 +23,12 @@ export default function BreakerDetailScreen() {
   const { rows, cols } = parseCoordinates(row as string, col as string);
 
   return (
-    <React.Fragment>
+    <View style={styles.wrapper}>
       <Stack.Screen
         options={{
           title: "Circuit Breaker Details",
           headerBackTitle: "Back",
+          headerShown: true,
         }}
       />
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -79,18 +82,22 @@ export default function BreakerDetailScreen() {
           </View>
         </View>
       </ScrollView>
-    </React.Fragment>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.background,
   },
   content: {
     paddingHorizontal: 20,
-    paddingTop: Platform.OS === 'android' ? 48 : 20,
+    paddingTop: 20,
     paddingBottom: 40,
   },
   infoCard: {
