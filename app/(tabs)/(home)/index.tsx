@@ -86,7 +86,7 @@ export default function HomeScreen() {
                 <View style={styles.coordinatesRow}>
                   <Text style={styles.coordinatesLabel}>Location:</Text>
                   <Text style={styles.coordinatesValue}>
-                    Row {breaker.row}, Col {breaker.col}
+                    Row {breaker.row.toUpperCase()}, Col {breaker.col}
                   </Text>
                 </View>
               </TouchableOpacity>
