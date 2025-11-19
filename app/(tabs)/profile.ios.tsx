@@ -71,12 +71,6 @@ export default function ProfileScreen() {
                 View the panel location and coordinates
               </Text>
             </View>
-            <View style={styles.listItem}>
-              <Text style={styles.number}>4.</Text>
-              <Text style={styles.listText}>
-                Use the visual diagram to locate the exact position
-              </Text>
-            </View>
           </View>
         </ScrollView>
       </View>
