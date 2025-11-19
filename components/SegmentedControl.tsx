@@ -71,26 +71,28 @@ export default function SegmentedControl({
           ]}
         />
         <View style={styles.segmentsContainer}>
-          {options.map((option, index) => {
-            const isSelected = option.value === selectedValue;
-            return (
-              <TouchableOpacity
-                key={`segment-${option.value}-${index}`}
-                style={[styles.segment, { width: segmentWidth }]}
-                onPress={() => onValueChange(option.value)}
-                activeOpacity={0.7}
-              >
-                <Text
-                  style={[
-                    styles.segmentText,
-                    isSelected && styles.segmentTextSelected,
-                  ]}
+          <React.Fragment>
+            {options.map((option, index) => {
+              const isSelected = option.value === selectedValue;
+              return (
+                <TouchableOpacity
+                  key={index}
+                  style={[styles.segment, { width: segmentWidth }]}
+                  onPress={() => onValueChange(option.value)}
+                  activeOpacity={0.7}
                 >
-                  {option.label}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
+                  <Text
+                    style={[
+                      styles.segmentText,
+                      isSelected && styles.segmentTextSelected,
+                    ]}
+                  >
+                    {option.label}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </React.Fragment>
         </View>
       </View>
     </View>

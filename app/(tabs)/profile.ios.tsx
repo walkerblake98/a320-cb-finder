@@ -36,24 +36,28 @@ export default function ProfileScreen() {
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Panel Locations</Text>
-          {panelLocations.map((location) => (
-            <View key={location.id} style={styles.listItem}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.listText}>
-                <Text style={styles.bold}>{location.title}</Text> {location.description}
-              </Text>
-            </View>
-          ))}
+          <React.Fragment>
+            {panelLocations.map((location, index) => (
+              <View key={index} style={styles.listItem}>
+                <Text style={styles.bullet}>•</Text>
+                <Text style={styles.listText}>
+                  <Text style={styles.bold}>{location.title}</Text> {location.description}
+                </Text>
+              </View>
+            ))}
+          </React.Fragment>
         </View>
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>How to Use</Text>
-          {howToSteps.map((step) => (
-            <View key={step.id} style={styles.listItem}>
-              <Text style={styles.number}>{step.number}</Text>
-              <Text style={styles.listText}>{step.text}</Text>
-            </View>
-          ))}
+          <React.Fragment>
+            {howToSteps.map((step, index) => (
+              <View key={index} style={styles.listItem}>
+                <Text style={styles.number}>{step.number}</Text>
+                <Text style={styles.listText}>{step.text}</Text>
+              </View>
+            ))}
+          </React.Fragment>
         </View>
       </ScrollView>
     </View>
