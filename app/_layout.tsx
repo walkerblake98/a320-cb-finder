@@ -16,6 +16,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { WidgetProvider } from "@/contexts/WidgetContext";
 import DisclaimerModal from "@/components/DisclaimerModal";
+import LoadingScreen from "@/components/LoadingScreen";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -30,10 +31,19 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
   const [showDisclaimer, setShowDisclaimer] = useState(true);
+  const [appReady, setAppReady] = useState(false);
 
   useEffect(() => {
     if (loaded) {
+      // Hide the native splash screen
       SplashScreen.hideAsync();
+      
+      // Show our custom loading screen for a brief moment
+      const timer = setTimeout(() => {
+        setAppReady(true);
+      }, 1500); // Show loading screen for 1.5 seconds
+
+      return () => clearTimeout(timer);
     }
   }, [loaded]);
 
@@ -42,8 +52,9 @@ export default function RootLayout() {
     setShowDisclaimer(false);
   };
 
-  if (!loaded) {
-    return null;
+  // Show loading screen while fonts are loading or during the brief delay
+  if (!loaded || !appReady) {
+    return <LoadingScreen />;
   }
 
   const CustomDefaultTheme: Theme = {
@@ -75,7 +86,7 @@ export default function RootLayout() {
     <React.Fragment>
       <StatusBar style="auto" animated />
       <ThemeProvider
-        value={colorScheme === "dark" ? CustomDarkTheme : CustomDefaultTheme}
+        value={colorScheme === "dark" ? CustomDefaultTheme : CustomDefaultTheme}
       >
         <WidgetProvider>
           <GestureHandlerRootView style={{ flex: 1 }}>
