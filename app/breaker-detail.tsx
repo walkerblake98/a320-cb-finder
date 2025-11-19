@@ -1,11 +1,9 @@
 
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Image, Dimensions, Platform } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
 import { useLocalSearchParams, Stack } from "expo-router";
 import { colors } from "@/styles/commonStyles";
 import { panels } from "@/data/panelCoordinates";
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export default function BreakerDetailScreen() {
   const params = useLocalSearchParams();
@@ -59,50 +57,27 @@ export default function BreakerDetailScreen() {
           </View>
         </View>
 
-        {panelInfo && (
-          <View style={styles.diagramCard}>
-            <Text style={styles.diagramTitle}>Panel Diagram</Text>
-            <Text style={styles.diagramSubtitle}>
-              Highlighted location on {panelInfo.name}
-            </Text>
-            
-            <View style={styles.imageContainer}>
-              <Image
-                source={{ uri: panelInfo.imageUrl }}
-                style={styles.panelImage}
-                resizeMode="contain"
-              />
-              <View style={styles.highlightOverlay}>
-                <View style={styles.highlightBox}>
-                  <Text style={styles.highlightText}>
-                    {rows.join('-')} / {cols.join(',')}
-                  </Text>
-                </View>
-              </View>
-            </View>
-
-            <View style={styles.legendCard}>
-              <Text style={styles.legendTitle}>How to locate:</Text>
-              <Text style={styles.legendText}>
-                - Find row(s): <Text style={styles.legendBold}>{rows.join(', ')}</Text>
-              </Text>
-              <Text style={styles.legendText}>
-                - Find column(s): <Text style={styles.legendBold}>{cols.join(', ')}</Text>
-              </Text>
-              <Text style={styles.legendText}>
-                - The circuit breaker is at the intersection
-              </Text>
-            </View>
-          </View>
-        )}
-
-        {!panelInfo && (
-          <View style={styles.noDiagramCard}>
-            <Text style={styles.noDiagramText}>
-              Panel diagram not available for {panel}
+        <View style={styles.locationCard}>
+          <Text style={styles.locationTitle}>How to Locate:</Text>
+          <View style={styles.instructionItem}>
+            <View style={styles.bulletPoint} />
+            <Text style={styles.instructionText}>
+              Find row(s): <Text style={styles.instructionBold}>{rows.join(', ')}</Text>
             </Text>
           </View>
-        )}
+          <View style={styles.instructionItem}>
+            <View style={styles.bulletPoint} />
+            <Text style={styles.instructionText}>
+              Find column(s): <Text style={styles.instructionBold}>{cols.join(', ')}</Text>
+            </Text>
+          </View>
+          <View style={styles.instructionItem}>
+            <View style={styles.bulletPoint} />
+            <Text style={styles.instructionText}>
+              The circuit breaker is at the intersection
+            </Text>
+          </View>
+        </View>
       </ScrollView>
     </React.Fragment>
   );
@@ -179,7 +154,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     fontStyle: 'italic',
   },
-  diagramCard: {
+  locationCard: {
     backgroundColor: colors.card,
     borderRadius: 16,
     padding: 20,
@@ -189,86 +164,33 @@ const styles = StyleSheet.create({
     boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.1)',
     elevation: 3,
   },
-  diagramTitle: {
-    fontSize: 20,
+  locationTitle: {
+    fontSize: 18,
     fontWeight: '700',
     color: colors.text,
-    marginBottom: 4,
-  },
-  diagramSubtitle: {
-    fontSize: 14,
-    color: colors.textSecondary,
     marginBottom: 16,
   },
-  imageContainer: {
-    width: '100%',
-    aspectRatio: 1.4,
-    backgroundColor: colors.background,
-    borderRadius: 12,
-    overflow: 'hidden',
-    position: 'relative',
-  },
-  panelImage: {
-    width: '100%',
-    height: '100%',
-  },
-  highlightOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  highlightBox: {
-    backgroundColor: colors.highlight + '80',
-    borderWidth: 3,
-    borderColor: colors.accent,
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    boxShadow: '0px 0px 12px rgba(255, 193, 7, 0.6)',
-    elevation: 5,
-  },
-  highlightText: {
-    fontSize: 16,
-    fontWeight: '800',
-    color: colors.text,
-  },
-  legendCard: {
-    backgroundColor: colors.background,
-    borderRadius: 12,
-    padding: 16,
-    marginTop: 16,
-  },
-  legendTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: colors.text,
+  instructionItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     marginBottom: 12,
   },
-  legendText: {
-    fontSize: 14,
-    color: colors.textSecondary,
-    marginBottom: 6,
-    lineHeight: 20,
+  bulletPoint: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: colors.primary,
+    marginTop: 7,
+    marginRight: 12,
   },
-  legendBold: {
+  instructionText: {
+    fontSize: 15,
+    color: colors.textSecondary,
+    lineHeight: 22,
+    flex: 1,
+  },
+  instructionBold: {
     fontWeight: '700',
     color: colors.primary,
-  },
-  noDiagramCard: {
-    backgroundColor: colors.card,
-    borderRadius: 16,
-    padding: 40,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: colors.secondary + '20',
-  },
-  noDiagramText: {
-    fontSize: 16,
-    color: colors.textSecondary,
-    textAlign: 'center',
   },
 });
