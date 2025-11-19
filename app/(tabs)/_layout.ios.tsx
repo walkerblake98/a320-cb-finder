@@ -4,7 +4,9 @@ import { NativeTabs, Icon, Label } from 'expo-router/unstable-native-tabs';
 
 export default function TabLayout() {
   return (
-    <NativeTabs>
+    <NativeTabs
+      tabBarActiveTintColor="#007AFF"
+    >
       <NativeTabs.Trigger key="profile" name="profile">
         <Icon sf="info.circle.fill" />
         <Label>Info</Label>
