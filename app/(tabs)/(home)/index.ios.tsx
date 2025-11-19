@@ -67,30 +67,28 @@ export default function HomeScreen() {
             <Text style={styles.emptySubtext}>Try a different search term</Text>
           </View>
         ) : (
-          <React.Fragment>
-            {filteredBreakers.map((breaker, index) => (
-              <TouchableOpacity
-                key={`${breaker.name}-${breaker.panel}-${breaker.row}-${breaker.col}-${index}`}
-                style={styles.breakerCard}
-                onPress={() => handleBreakerPress(breaker)}
-                activeOpacity={0.7}
-              >
-                <View style={styles.breakerHeader}>
-                  <Text style={styles.breakerName}>{breaker.name}</Text>
-                  <View style={styles.panelBadge}>
-                    <Text style={styles.panelText}>{breaker.panel}</Text>
-                  </View>
+          filteredBreakers.map((breaker, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.breakerCard}
+              onPress={() => handleBreakerPress(breaker)}
+              activeOpacity={0.7}
+            >
+              <View style={styles.breakerHeader}>
+                <Text style={styles.breakerName}>{breaker.name}</Text>
+                <View style={styles.panelBadge}>
+                  <Text style={styles.panelText}>{breaker.panel}</Text>
                 </View>
-                <Text style={styles.breakerDescription}>{breaker.description}</Text>
-                <View style={styles.coordinatesRow}>
-                  <Text style={styles.coordinatesLabel}>Location:</Text>
-                  <Text style={styles.coordinatesValue}>
-                    Row {breaker.row}, Col {breaker.col}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </React.Fragment>
+              </View>
+              <Text style={styles.breakerDescription}>{breaker.description}</Text>
+              <View style={styles.coordinatesRow}>
+                <Text style={styles.coordinatesLabel}>Location:</Text>
+                <Text style={styles.coordinatesValue}>
+                  Row {breaker.row}, Col {breaker.col}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))
         )}
       </ScrollView>
     </View>
