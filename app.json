@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Circuit Finder",
-    "slug": "Circuit Finder",
+    "name": "A320 CB Finder",
+    "slug": "A320 CB Finder",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/natively-dark.png",
@@ -44,5 +44,5 @@
       "router": {}
     }
   },
-  "scheme": "Circuit Finder"
+  "scheme": "A320 CB Finder"
 }
