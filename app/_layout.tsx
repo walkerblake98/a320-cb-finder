@@ -79,6 +79,10 @@ export default function RootLayout() {
       >
         <WidgetProvider>
           <GestureHandlerRootView style={{ flex: 1 }}>
+            <DisclaimerModal 
+              visible={showDisclaimer} 
+              onAcknowledge={handleAcknowledge}
+            />
             <Stack
               screenOptions={{
                 headerShown: false,
@@ -122,10 +126,6 @@ export default function RootLayout() {
           </GestureHandlerRootView>
         </WidgetProvider>
       </ThemeProvider>
-      <DisclaimerModal 
-        visible={showDisclaimer} 
-        onAcknowledge={handleAcknowledge}
-      />
     </React.Fragment>
   );
 }

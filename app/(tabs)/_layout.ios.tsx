@@ -11,7 +11,6 @@ export default function TabLayout() {
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
   const [selectedTab, setSelectedTab] = useState('info');
-  const [hasInitialized, setHasInitialized] = useState(false);
 
   const tabs: SegmentOption[] = [
     { label: 'Info', value: 'info' },
@@ -27,15 +26,6 @@ export default function TabLayout() {
     }
   }, [pathname]);
 
-  useEffect(() => {
-    // Ensure we start on the Info page only once
-    if (!hasInitialized) {
-      console.log('Initial navigation to Info page');
-      router.replace('/(tabs)/profile');
-      setHasInitialized(true);
-    }
-  }, [hasInitialized, router]);
-
   const handleTabChange = (value: string) => {
     console.log('Tab changed to:', value);
     setSelectedTab(value);
@@ -48,7 +38,7 @@ export default function TabLayout() {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.header, { paddingTop: insets.top }]}>
+      <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
         <SegmentedControl
           options={tabs}
           selectedValue={selectedTab}
@@ -62,9 +52,9 @@ export default function TabLayout() {
         }}
         initialRouteName="profile"
       >
-        <Stack.Screen key="profile" name="profile" />
-        <Stack.Screen key="home" name="(home)" />
-        <Stack.Screen key="index" name="index" />
+        <Stack.Screen name="profile" />
+        <Stack.Screen name="(home)" />
+        <Stack.Screen name="index" />
       </Stack>
     </View>
   );

@@ -53,6 +53,7 @@ export default function TabLayout() {
           headerShown: false,
           animation: 'fade',
         }}
+        initialRouteName="profile"
       >
         <Stack.Screen name="profile" />
         <Stack.Screen name="(home)" />
