@@ -59,28 +59,6 @@ export default function BreakerDetailScreen() {
             <Text style={styles.infoValue}>{col}</Text>
           </View>
         </View>
-
-        <View style={styles.locationCard}>
-          <Text style={styles.locationTitle}>How to Locate:</Text>
-          <View style={styles.instructionItem}>
-            <View style={styles.bulletPoint} />
-            <Text style={styles.instructionText}>
-              Find row(s): <Text style={styles.instructionBold}>{rows.join(', ')}</Text>
-            </Text>
-          </View>
-          <View style={styles.instructionItem}>
-            <View style={styles.bulletPoint} />
-            <Text style={styles.instructionText}>
-              Find column(s): <Text style={styles.instructionBold}>{cols.join(', ')}</Text>
-            </Text>
-          </View>
-          <View style={styles.instructionItem}>
-            <View style={styles.bulletPoint} />
-            <Text style={styles.instructionText}>
-              The circuit breaker is at the intersection
-            </Text>
-          </View>
-        </View>
       </ScrollView>
     </View>
   );
@@ -160,44 +138,5 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     marginBottom: 12,
     fontStyle: 'italic',
-  },
-  locationCard: {
-    backgroundColor: colors.card,
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: colors.secondary + '20',
-    boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.1)',
-    elevation: 3,
-  },
-  locationTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: colors.text,
-    marginBottom: 16,
-  },
-  instructionItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: 12,
-  },
-  bulletPoint: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: colors.primary,
-    marginTop: 7,
-    marginRight: 12,
-  },
-  instructionText: {
-    fontSize: 15,
-    color: colors.textSecondary,
-    lineHeight: 22,
-    flex: 1,
-  },
-  instructionBold: {
-    fontWeight: '700',
-    color: colors.primary,
   },
 });

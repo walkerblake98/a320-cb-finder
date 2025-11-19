@@ -44,7 +44,7 @@ export default function TabLayout() {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
+      <View style={[styles.header, { paddingTop: insets.top }]}>
         <SegmentedControl
           options={tabs}
           selectedValue={selectedTab}

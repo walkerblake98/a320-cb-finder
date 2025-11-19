@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: colors.card,
-    paddingTop: 48,
+    paddingTop: 16,
     paddingBottom: 8,
     borderBottomWidth: 1,
     borderBottomColor: colors.secondary + '20',
