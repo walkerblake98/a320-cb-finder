@@ -30,6 +30,13 @@ export default function TabLayout() {
 
   const handleTabChange = (value: string) => {
     console.log('Tab changed to:', value);
+    
+    // Prevent navigation if already on the selected tab
+    if (value === selectedTab) {
+      console.log('Already on this tab, skipping navigation');
+      return;
+    }
+    
     setSelectedTab(value);
     
     if (value === 'info') {
