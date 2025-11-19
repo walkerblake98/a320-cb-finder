@@ -6,16 +6,16 @@ import FloatingTabBar, { TabBarItem } from '@/components/FloatingTabBar';
 export default function TabLayout() {
   const tabs: TabBarItem[] = [
     {
-      name: '(home)',
-      route: '/(tabs)/(home)/',
-      icon: 'search',
-      label: 'Search',
-    },
-    {
       name: 'profile',
       route: '/(tabs)/profile',
       icon: 'info',
       label: 'Info',
+    },
+    {
+      name: '(home)',
+      route: '/(tabs)/(home)/',
+      icon: 'search',
+      label: 'Search',
     },
   ];
 
@@ -27,8 +27,8 @@ export default function TabLayout() {
           animation: 'none',
         }}
       >
-        <Stack.Screen key="home" name="(home)" />
         <Stack.Screen key="profile" name="profile" />
+        <Stack.Screen key="home" name="(home)" />
       </Stack>
       <FloatingTabBar tabs={tabs} />
     </React.Fragment>
