@@ -1,6 +1,6 @@
 
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { colors } from "@/styles/commonStyles";
 
 export default function ProfileScreen() {
@@ -37,13 +37,19 @@ export default function ProfileScreen() {
           <View style={styles.listItem}>
             <Text style={styles.bullet}>•</Text>
             <Text style={styles.listText}>
-              <Text style={styles.bold}>2000 VU:</Text> Forward Cabin Ceiling
+              <Text style={styles.bold}>105 E&E - 106 E&E:</Text> Electronics & Equipment Bay
             </Text>
           </View>
           <View style={styles.listItem}>
             <Text style={styles.bullet}>•</Text>
             <Text style={styles.listText}>
-              <Text style={styles.bold}>2001 VU:</Text> Aft Cabin Ceiling
+              <Text style={styles.bold}>Fwd Cabin:</Text> Forward Cabin Ceiling
+            </Text>
+          </View>
+          <View style={styles.listItem}>
+            <Text style={styles.bullet}>•</Text>
+            <Text style={styles.listText}>
+              <Text style={styles.bold}>Aft Cabin:</Text> Aft Cabin Ceiling
             </Text>
           </View>
         </View>
@@ -81,11 +87,11 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: 20,
-    paddingTop: Platform.OS === 'android' ? 48 : 20,
-    paddingBottom: 120,
+    paddingTop: 20,
+    paddingBottom: 40,
   },
   header: {
-    paddingVertical: 24,
+    paddingVertical: 20,
     alignItems: 'center',
   },
   title: {

@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from "react";
-import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet, Platform } from "react-native";
+import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
 import { colors } from "@/styles/commonStyles";
 import { circuitBreakers, CircuitBreaker } from "@/data/circuitBreakerData";
 import { useRouter } from "expo-router";
@@ -101,18 +101,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingTop: Platform.OS === 'android' ? 48 : 0,
   },
   header: {
     paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 16,
+    paddingTop: 16,
+    paddingBottom: 12,
     backgroundColor: colors.card,
     borderBottomWidth: 1,
     borderBottomColor: colors.secondary + '30',
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: '800',
     color: colors.text,
     marginBottom: 4,
@@ -142,7 +141,7 @@ const styles = StyleSheet.create({
   resultsContent: {
     paddingHorizontal: 20,
     paddingTop: 16,
-    paddingBottom: 120,
+    paddingBottom: 40,
   },
   emptyState: {
     alignItems: 'center',

@@ -1,80 +1,82 @@
 
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Stack } from "expo-router";
 import { colors } from "@/styles/commonStyles";
 
 export default function ProfileScreen() {
   return (
-    <React.Fragment>
-      <Stack.Screen
-        options={{
-          title: "Information",
-          headerLargeTitle: true,
-        }}
-      />
-      <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.content}>
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>About This App</Text>
-            <Text style={styles.cardText}>
-              This app helps pilots quickly locate circuit breakers in the Airbus A320 aircraft by system name. 
-              Simply search for a circuit breaker and view its exact panel location with coordinates.
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.content}>
+        <View style={styles.header}>
+          <Text style={styles.title}>A320 CB Locator</Text>
+          <Text style={styles.subtitle}>Circuit Breaker Reference Guide</Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>About This App</Text>
+          <Text style={styles.cardText}>
+            This app helps pilots quickly locate circuit breakers in the Airbus A320 aircraft by system name. 
+            Simply search for a circuit breaker and view its exact panel location with coordinates.
+          </Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Panel Locations</Text>
+          <View style={styles.listItem}>
+            <Text style={styles.bullet}>•</Text>
+            <Text style={styles.listText}>
+              <Text style={styles.bold}>49 VU:</Text> Cockpit Overhead Panel
             </Text>
           </View>
-
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Panel Locations</Text>
-            <View style={styles.listItem}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.listText}>
-                <Text style={styles.bold}>49 VU:</Text> Cockpit Overhead Panel
-              </Text>
-            </View>
-            <View style={styles.listItem}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.listText}>
-                <Text style={styles.bold}>121 VU - 125 VU:</Text> Behind F/O&apos;s Seat
-              </Text>
-            </View>
-            <View style={styles.listItem}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.listText}>
-                <Text style={styles.bold}>2000 VU:</Text> Forward Cabin Ceiling
-              </Text>
-            </View>
-            <View style={styles.listItem}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.listText}>
-                <Text style={styles.bold}>2001 VU:</Text> Aft Cabin Ceiling
-              </Text>
-            </View>
+          <View style={styles.listItem}>
+            <Text style={styles.bullet}>•</Text>
+            <Text style={styles.listText}>
+              <Text style={styles.bold}>121 VU - 125 VU:</Text> Behind F/O&apos;s Seat
+            </Text>
           </View>
-
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>How to Use</Text>
-            <View style={styles.listItem}>
-              <Text style={styles.number}>1.</Text>
-              <Text style={styles.listText}>
-                Enter the system name in the search bar
-              </Text>
-            </View>
-            <View style={styles.listItem}>
-              <Text style={styles.number}>2.</Text>
-              <Text style={styles.listText}>
-                Tap on a circuit breaker from the results
-              </Text>
-            </View>
-            <View style={styles.listItem}>
-              <Text style={styles.number}>3.</Text>
-              <Text style={styles.listText}>
-                View the panel location and coordinates
-              </Text>
-            </View>
+          <View style={styles.listItem}>
+            <Text style={styles.bullet}>•</Text>
+            <Text style={styles.listText}>
+              <Text style={styles.bold}>105 E&E - 106 E&E:</Text> Electronics & Equipment Bay
+            </Text>
           </View>
-        </ScrollView>
-      </View>
-    </React.Fragment>
+          <View style={styles.listItem}>
+            <Text style={styles.bullet}>•</Text>
+            <Text style={styles.listText}>
+              <Text style={styles.bold}>Fwd Cabin:</Text> Forward Cabin Ceiling
+            </Text>
+          </View>
+          <View style={styles.listItem}>
+            <Text style={styles.bullet}>•</Text>
+            <Text style={styles.listText}>
+              <Text style={styles.bold}>Aft Cabin:</Text> Aft Cabin Ceiling
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>How to Use</Text>
+          <View style={styles.listItem}>
+            <Text style={styles.number}>1.</Text>
+            <Text style={styles.listText}>
+              Enter the system name in the search bar
+            </Text>
+          </View>
+          <View style={styles.listItem}>
+            <Text style={styles.number}>2.</Text>
+            <Text style={styles.listText}>
+              Tap on a circuit breaker from the results
+            </Text>
+          </View>
+          <View style={styles.listItem}>
+            <Text style={styles.number}>3.</Text>
+            <Text style={styles.listText}>
+              View the panel location and coordinates
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -87,6 +89,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 40,
+  },
+  header: {
+    paddingVertical: 20,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: colors.text,
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: colors.textSecondary,
   },
   card: {
     backgroundColor: colors.card,

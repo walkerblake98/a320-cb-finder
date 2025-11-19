@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo } from "react";
 import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
-import { Stack, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { colors } from "@/styles/commonStyles";
 import { circuitBreakers, CircuitBreaker } from "@/data/circuitBreakerData";
 
@@ -38,65 +38,62 @@ export default function HomeScreen() {
   };
 
   return (
-    <React.Fragment>
-      <Stack.Screen
-        options={{
-          title: "A320 CB Locator",
-          headerLargeTitle: true,
-        }}
-      />
-      <View style={styles.container}>
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search circuit breakers..."
-            placeholderTextColor={colors.textSecondary}
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
-        </View>
-
-        <ScrollView 
-          style={styles.resultsList}
-          contentContainerStyle={styles.resultsContent}
-          showsVerticalScrollIndicator={false}
-        >
-          {filteredBreakers.length === 0 ? (
-            <View style={styles.emptyState}>
-              <Text style={styles.emptyText}>No circuit breakers found</Text>
-              <Text style={styles.emptySubtext}>Try a different search term</Text>
-            </View>
-          ) : (
-            <React.Fragment>
-              {filteredBreakers.map((breaker, index) => (
-                <TouchableOpacity
-                  key={index}
-                  style={styles.breakerCard}
-                  onPress={() => handleBreakerPress(breaker)}
-                  activeOpacity={0.7}
-                >
-                  <View style={styles.breakerHeader}>
-                    <Text style={styles.breakerName}>{breaker.name}</Text>
-                    <View style={styles.panelBadge}>
-                      <Text style={styles.panelText}>{breaker.panel}</Text>
-                    </View>
-                  </View>
-                  <Text style={styles.breakerDescription}>{breaker.description}</Text>
-                  <View style={styles.coordinatesRow}>
-                    <Text style={styles.coordinatesLabel}>Location:</Text>
-                    <Text style={styles.coordinatesValue}>
-                      Row {breaker.row}, Col {breaker.col}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              ))}
-            </React.Fragment>
-          )}
-        </ScrollView>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>A320 Circuit Breaker Locator</Text>
+        <Text style={styles.subtitle}>Search by system name</Text>
       </View>
-    </React.Fragment>
+
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search circuit breakers..."
+          placeholderTextColor={colors.textSecondary}
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </View>
+
+      <ScrollView 
+        style={styles.resultsList}
+        contentContainerStyle={styles.resultsContent}
+        showsVerticalScrollIndicator={false}
+      >
+        {filteredBreakers.length === 0 ? (
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyText}>No circuit breakers found</Text>
+            <Text style={styles.emptySubtext}>Try a different search term</Text>
+          </View>
+        ) : (
+          <React.Fragment>
+            {filteredBreakers.map((breaker, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.breakerCard}
+                onPress={() => handleBreakerPress(breaker)}
+                activeOpacity={0.7}
+              >
+                <View style={styles.breakerHeader}>
+                  <Text style={styles.breakerName}>{breaker.name}</Text>
+                  <View style={styles.panelBadge}>
+                    <Text style={styles.panelText}>{breaker.panel}</Text>
+                  </View>
+                </View>
+                <Text style={styles.breakerDescription}>{breaker.description}</Text>
+                <View style={styles.coordinatesRow}>
+                  <Text style={styles.coordinatesLabel}>Location:</Text>
+                  <Text style={styles.coordinatesValue}>
+                    Row {breaker.row}, Col {breaker.col}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </React.Fragment>
+        )}
+      </ScrollView>
+    </View>
   );
 }
 
@@ -104,6 +101,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  header: {
+    paddingHorizontal: 20,
+    paddingTop: 16,
+    paddingBottom: 12,
+    backgroundColor: colors.card,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.secondary + '30',
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: colors.text,
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: colors.textSecondary,
   },
   searchContainer: {
     paddingHorizontal: 20,
