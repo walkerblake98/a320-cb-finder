@@ -1,9 +1,9 @@
 
 import React, { useState, useMemo } from "react";
 import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
 import { colors } from "@/styles/commonStyles";
 import { circuitBreakers, CircuitBreaker } from "@/data/circuitBreakerData";
+import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,7 +69,7 @@ export default function HomeScreen() {
         ) : (
           filteredBreakers.map((breaker, index) => (
             <TouchableOpacity
-              key={index}
+              key={`breaker-${index}-${breaker.name}`}
               style={styles.breakerCard}
               onPress={() => handleBreakerPress(breaker)}
               activeOpacity={0.7}
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    paddingTop: 48,
   },
   header: {
     paddingHorizontal: 20,

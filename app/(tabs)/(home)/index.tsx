@@ -69,7 +69,7 @@ export default function HomeScreen() {
         ) : (
           filteredBreakers.map((breaker, index) => (
             <TouchableOpacity
-              key={index}
+              key={`breaker-${index}-${breaker.name}`}
               style={styles.breakerCard}
               onPress={() => handleBreakerPress(breaker)}
               activeOpacity={0.7}

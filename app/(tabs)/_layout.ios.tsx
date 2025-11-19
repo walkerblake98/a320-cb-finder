@@ -1,15 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Stack, useRouter, usePathname } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Stack, useRouter, usePathname, useSegments } from 'expo-router';
 import SegmentedControl, { SegmentOption } from '@/components/SegmentedControl';
 import { colors } from '@/styles/commonStyles';
 
 export default function TabLayout() {
   const router = useRouter();
   const pathname = usePathname();
-  const insets = useSafeAreaInsets();
+  const segments = useSegments();
   const [selectedTab, setSelectedTab] = useState('info');
 
   const tabs: SegmentOption[] = [
@@ -19,16 +18,19 @@ export default function TabLayout() {
 
   useEffect(() => {
     console.log('Current pathname:', pathname);
-    if (pathname.includes('/(home)')) {
+    console.log('Current segments:', segments);
+    
+    if (pathname.includes('/(home)') || pathname.includes('/home')) {
       setSelectedTab('search');
     } else if (pathname.includes('/profile')) {
       setSelectedTab('info');
     }
-  }, [pathname]);
+  }, [pathname, segments]);
 
   const handleTabChange = (value: string) => {
     console.log('Tab changed to:', value);
     setSelectedTab(value);
+    
     if (value === 'info') {
       router.push('/(tabs)/profile');
     } else if (value === 'search') {
@@ -38,7 +40,7 @@ export default function TabLayout() {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
+      <View style={styles.header}>
         <SegmentedControl
           options={tabs}
           selectedValue={selectedTab}
@@ -67,6 +69,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: colors.card,
+    paddingTop: 60,
     paddingBottom: 8,
     borderBottomWidth: 1,
     borderBottomColor: colors.secondary + '20',
