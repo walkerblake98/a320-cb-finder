@@ -75,38 +75,6 @@ export default function ProfileScreen() {
             </Text>
           </View>
         </View>
-
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Important Notes</Text>
-          <Text style={styles.cardText}>
-            <Text style={styles.bold}>Reference Only:</Text> This guide is for reference purposes. 
-            Flight manual has priority. Always follow company directives when pulling or resetting circuit breakers.
-          </Text>
-          <Text style={[styles.cardText, { marginTop: 12 }]}>
-            <Text style={styles.bold}>Color Coding:</Text>
-          </Text>
-          <View style={styles.listItem}>
-            <Text style={styles.bullet}>•</Text>
-            <Text style={styles.listText}>
-              Green Capped CBs - Monitored by ECAM
-            </Text>
-          </View>
-          <View style={styles.listItem}>
-            <Text style={styles.bullet}>•</Text>
-            <Text style={styles.listText}>
-              Yellow Capped CBs - Flight conditions permitting, may be pulled to extend battery life when operating on Battery Only
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            Data compiled from A320 CB Guide
-          </Text>
-          <Text style={styles.footerText}>
-            © 1998 by Guidex, by George!
-          </Text>
-        </View>
       </ScrollView>
     </View>
   );
@@ -184,15 +152,5 @@ const styles = StyleSheet.create({
   bold: {
     fontWeight: '700',
     color: colors.text,
-  },
-  footer: {
-    paddingVertical: 24,
-    alignItems: 'center',
-  },
-  footerText: {
-    fontSize: 12,
-    color: colors.textSecondary,
-    textAlign: 'center',
-    marginBottom: 4,
   },
 });
