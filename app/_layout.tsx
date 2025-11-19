@@ -1,5 +1,6 @@
+
 import "react-native-reanimated";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import { Stack, router } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -15,6 +16,7 @@ import {
 } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { WidgetProvider } from "@/contexts/WidgetContext";
+import DisclaimerModal from "@/components/DisclaimerModal";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -29,6 +31,7 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
 
   useEffect(() => {
     if (loaded) {
@@ -47,6 +50,11 @@ export default function RootLayout() {
       );
     }
   }, [networkState.isConnected, networkState.isInternetReachable]);
+
+  const handleAcknowledge = () => {
+    console.log('Disclaimer acknowledged');
+    setShowDisclaimer(false);
+  };
 
   if (!loaded) {
     return null;
@@ -118,6 +126,10 @@ export default function RootLayout() {
             </GestureHandlerRootView>
           </WidgetProvider>
         </ThemeProvider>
+        <DisclaimerModal 
+          visible={showDisclaimer} 
+          onAcknowledge={handleAcknowledge}
+        />
     </>
   );
 }
