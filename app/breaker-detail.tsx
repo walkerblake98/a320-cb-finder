@@ -53,20 +53,24 @@ export default function BreakerDetailScreen() {
           headerTintColor: themeColors.primary,
           headerTitleStyle: {
             color: themeColors.text,
+            fontSize: 18,
+            fontWeight: '600',
           },
           headerLeft: () => (
             <TouchableOpacity 
               onPress={handleBackPress}
               style={styles.backButton}
-              activeOpacity={0.7}
+              activeOpacity={0.6}
             >
-              <IconSymbol 
-                ios_icon_name="chevron.left" 
-                android_material_icon_name="arrow_back" 
-                size={24} 
-                color={themeColors.primary}
-              />
-              <Text style={[styles.backButtonText, { color: themeColors.primary }]}>Back</Text>
+              <View style={styles.backButtonContent}>
+                <IconSymbol 
+                  ios_icon_name="chevron.left" 
+                  android_material_icon_name="arrow_back" 
+                  size={22} 
+                  color={themeColors.primary}
+                />
+                <Text style={[styles.backButtonText, { color: themeColors.primary }]}>Back</Text>
+              </View>
             </TouchableOpacity>
           ),
         }}
@@ -119,16 +123,21 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   backButton: {
+    paddingLeft: 8,
+    paddingRight: 12,
+    paddingVertical: 8,
+    marginLeft: -4,
+  },
+  backButtonContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    gap: 2,
   },
   backButtonText: {
     fontSize: 17,
     fontWeight: '400',
-    marginLeft: 4,
     color: colors.primary,
+    letterSpacing: -0.2,
   },
   infoCard: {
     backgroundColor: colors.card,
