@@ -75,7 +75,7 @@ export default function SegmentedControl({
             const isSelected = option.value === selectedValue;
             return (
               <TouchableOpacity
-                key={index}
+                key={`${option.value}-${index}`}
                 style={[styles.segment, { width: segmentWidth }]}
                 onPress={() => onValueChange(option.value)}
                 activeOpacity={0.7}
