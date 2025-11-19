@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "A320 CB Finder",
-    "slug": "A320 CB Finder",
+    "name": "A320 CB Locator",
+    "slug": "A320 CB Locator",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/natively-dark.png",
@@ -44,5 +44,5 @@
       "router": {}
     }
   },
-  "scheme": "A320 CB Finder"
+  "scheme": "A320 CB Locator"
 }
