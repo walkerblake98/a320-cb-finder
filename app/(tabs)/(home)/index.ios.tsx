@@ -115,10 +115,12 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: colors.text,
     marginBottom: 4,
+    textAlign: 'center',
   },
   subtitle: {
     fontSize: 14,
     color: colors.textSecondary,
+    textAlign: 'center',
   },
   searchContainer: {
     paddingHorizontal: 20,
