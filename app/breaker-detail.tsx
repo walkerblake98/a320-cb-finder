@@ -1,13 +1,17 @@
 
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { useLocalSearchParams, Stack } from "expo-router";
-import { colors } from "@/styles/commonStyles";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, useColorScheme } from "react-native";
+import { useLocalSearchParams, Stack, useRouter } from "expo-router";
+import { colors, getColors } from "@/styles/commonStyles";
 import { panels } from "@/data/panelCoordinates";
+import { IconSymbol } from "@/components/IconSymbol";
 
 export default function BreakerDetailScreen() {
   const params = useLocalSearchParams();
   const { name, panel, row, col, description } = params;
+  const router = useRouter();
+  const colorScheme = useColorScheme();
+  const themeColors = getColors(colorScheme);
 
   console.log('Breaker detail params:', params);
 
@@ -27,41 +31,72 @@ export default function BreakerDetailScreen() {
 
   const { rows, cols } = parseCoordinates(row as string, col as string);
 
+  const handleBackPress = () => {
+    console.log('Back button pressed');
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/(tabs)/(home)');
+    }
+  };
+
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, { backgroundColor: themeColors.background }]}>
       <Stack.Screen
         options={{
           title: "Circuit Breaker Details",
           headerBackTitle: "Back",
           headerShown: true,
+          headerStyle: {
+            backgroundColor: themeColors.card,
+          },
+          headerTintColor: themeColors.primary,
+          headerTitleStyle: {
+            color: themeColors.text,
+          },
+          headerLeft: () => (
+            <TouchableOpacity 
+              onPress={handleBackPress}
+              style={styles.backButton}
+              activeOpacity={0.7}
+            >
+              <IconSymbol 
+                ios_icon_name="chevron.left" 
+                android_material_icon_name="arrow_back" 
+                size={24} 
+                color={themeColors.primary}
+              />
+              <Text style={[styles.backButtonText, { color: themeColors.primary }]}>Back</Text>
+            </TouchableOpacity>
+          ),
         }}
       />
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-        <View style={styles.infoCard}>
-          <Text style={styles.breakerName}>{name}</Text>
-          <Text style={styles.breakerDescription}>{description}</Text>
+        <View style={[styles.infoCard, { backgroundColor: themeColors.card, borderColor: themeColors.secondary + '20' }]}>
+          <Text style={[styles.breakerName, { color: themeColors.text }]}>{name}</Text>
+          <Text style={[styles.breakerDescription, { color: themeColors.textSecondary }]}>{description}</Text>
           
-          <View style={styles.divider} />
+          <View style={[styles.divider, { backgroundColor: themeColors.secondary + '20' }]} />
           
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Panel:</Text>
-            <View style={styles.panelBadge}>
+            <Text style={[styles.infoLabel, { color: themeColors.text }]}>Panel:</Text>
+            <View style={[styles.panelBadge, { backgroundColor: themeColors.primary }]}>
               <Text style={styles.panelText}>{panel}</Text>
             </View>
           </View>
 
           {panelInfo && (
-            <Text style={styles.panelDescription}>{panelInfo.description}</Text>
+            <Text style={[styles.panelDescription, { color: themeColors.textSecondary }]}>{panelInfo.description}</Text>
           )}
 
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Row:</Text>
-            <Text style={styles.infoValue}>{row}</Text>
+            <Text style={[styles.infoLabel, { color: themeColors.text }]}>Row:</Text>
+            <Text style={[styles.infoValue, { color: themeColors.primary }]}>{row}</Text>
           </View>
 
           <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Column:</Text>
-            <Text style={styles.infoValue}>{col}</Text>
+            <Text style={[styles.infoLabel, { color: themeColors.text }]}>Column:</Text>
+            <Text style={[styles.infoValue, { color: themeColors.primary }]}>{col}</Text>
           </View>
         </View>
       </ScrollView>
@@ -82,6 +117,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 40,
+  },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+  },
+  backButtonText: {
+    fontSize: 17,
+    fontWeight: '400',
+    marginLeft: 4,
+    color: colors.primary,
   },
   infoCard: {
     backgroundColor: colors.card,

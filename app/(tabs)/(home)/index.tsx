@@ -25,8 +25,8 @@ export default function HomeScreen() {
 
   const handleBreakerPress = (breaker: CircuitBreaker) => {
     console.log("Selected breaker:", breaker.name);
-    // Use replace instead of push to prevent multiple windows stacking
-    router.replace({
+    // Use push to maintain navigation stack for back button
+    router.push({
       pathname: "/breaker-detail",
       params: {
         name: breaker.name,
