@@ -11,6 +11,7 @@ export default function TabLayout() {
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
   const [selectedTab, setSelectedTab] = useState('info');
+  const [hasInitialized, setHasInitialized] = useState(false);
 
   const tabs: SegmentOption[] = [
     { label: 'Info', value: 'info' },
@@ -27,10 +28,13 @@ export default function TabLayout() {
   }, [pathname]);
 
   useEffect(() => {
-    // Ensure we start on the Info page
-    console.log('Initial navigation to Info page');
-    router.replace('/(tabs)/profile');
-  }, []);
+    // Ensure we start on the Info page only once
+    if (!hasInitialized) {
+      console.log('Initial navigation to Info page');
+      router.replace('/(tabs)/profile');
+      setHasInitialized(true);
+    }
+  }, [hasInitialized, router]);
 
   const handleTabChange = (value: string) => {
     console.log('Tab changed to:', value);
@@ -60,6 +64,7 @@ export default function TabLayout() {
       >
         <Stack.Screen key="profile" name="profile" />
         <Stack.Screen key="home" name="(home)" />
+        <Stack.Screen key="index" name="index" />
       </Stack>
     </View>
   );

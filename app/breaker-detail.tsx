@@ -1,6 +1,6 @@
 
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { useLocalSearchParams, Stack } from "expo-router";
 import { colors } from "@/styles/commonStyles";
 import { panels } from "@/data/panelCoordinates";
@@ -14,10 +14,15 @@ export default function BreakerDetailScreen() {
   const panelInfo = panels.find((p) => p.name === panel);
 
   const parseCoordinates = (rowStr: string, colStr: string) => {
-    const rows = rowStr.includes('-') ? rowStr.split('-') : [rowStr];
-    const cols = colStr.includes('-') ? colStr.split('-') : colStr.includes('&') ? colStr.split('&').map(c => c.trim()) : [colStr];
-    
-    return { rows, cols };
+    try {
+      const rows = rowStr.includes('-') ? rowStr.split('-') : [rowStr];
+      const cols = colStr.includes('-') ? colStr.split('-') : colStr.includes('&') ? colStr.split('&').map(c => c.trim()) : [colStr];
+      
+      return { rows, cols };
+    } catch (error) {
+      console.error('Error parsing coordinates:', error);
+      return { rows: [rowStr], cols: [colStr] };
+    }
   };
 
   const { rows, cols } = parseCoordinates(row as string, col as string);

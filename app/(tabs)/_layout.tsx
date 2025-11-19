@@ -56,6 +56,7 @@ export default function TabLayout() {
       >
         <Stack.Screen name="profile" />
         <Stack.Screen name="(home)" />
+        <Stack.Screen name="index" />
       </Stack>
     </View>
   );

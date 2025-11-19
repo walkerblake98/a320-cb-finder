@@ -1,6 +1,24 @@
 
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 
+// Function to get colors based on color scheme
+export const getColors = (colorScheme: 'light' | 'dark' | null | undefined) => {
+  const isDark = colorScheme === 'dark';
+  
+  return {
+    background: isDark ? '#000000' : '#f0f0f0',
+    text: isDark ? '#FFFFFF' : '#333333',
+    textSecondary: isDark ? '#AAAAAA' : '#777777',
+    primary: isDark ? '#0A84FF' : '#007BFF',
+    secondary: isDark ? '#8E8E93' : '#6C757D',
+    accent: isDark ? '#FFD60A' : '#FFC107',
+    card: isDark ? '#1C1C1E' : '#FFFFFF',
+    highlight: isDark ? '#FFD60A' : '#FFFF00',
+    border: isDark ? '#38383A' : '#E5E5E5',
+  };
+};
+
+// Default colors for light mode (for backwards compatibility)
 export const colors = {
   background: '#f0f0f0',
   text: '#333333',
@@ -10,6 +28,7 @@ export const colors = {
   accent: '#FFC107',
   card: '#FFFFFF',
   highlight: '#FFFF00',
+  border: '#E5E5E5',
 };
 
 export const buttonStyles = StyleSheet.create({
