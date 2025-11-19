@@ -14,9 +14,6 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { WidgetProvider } from "@/contexts/WidgetContext";
-import DisclaimerModal from "@/components/DisclaimerModal";
-import LoadingScreen from "@/components/LoadingScreen";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -30,31 +27,15 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
-  const [showDisclaimer, setShowDisclaimer] = useState(true);
-  const [appReady, setAppReady] = useState(false);
 
   useEffect(() => {
     if (loaded) {
-      // Hide the native splash screen
       SplashScreen.hideAsync();
-      
-      // Show our custom loading screen for a brief moment
-      const timer = setTimeout(() => {
-        setAppReady(true);
-      }, 1500); // Show loading screen for 1.5 seconds
-
-      return () => clearTimeout(timer);
     }
   }, [loaded]);
 
-  const handleAcknowledge = () => {
-    console.log('Disclaimer acknowledged');
-    setShowDisclaimer(false);
-  };
-
-  // Show loading screen while fonts are loading or during the brief delay
-  if (!loaded || !appReady) {
-    return <LoadingScreen />;
+  if (!loaded) {
+    return null;
   }
 
   const CustomDefaultTheme: Theme = {
@@ -86,56 +67,19 @@ export default function RootLayout() {
     <React.Fragment>
       <StatusBar style="auto" animated />
       <ThemeProvider
-        value={colorScheme === "dark" ? CustomDefaultTheme : CustomDefaultTheme}
+        value={colorScheme === "dark" ? CustomDarkTheme : CustomDefaultTheme}
       >
-        <WidgetProvider>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <DisclaimerModal 
-              visible={showDisclaimer} 
-              onAcknowledge={handleAcknowledge}
-            />
-            <Stack
-              screenOptions={{
-                headerShown: false,
-              }}
-            >
-              <Stack.Screen name="(tabs)" />
-              <Stack.Screen
-                name="breaker-detail"
-                options={{
-                  presentation: "card",
-                  headerShown: true,
-                  title: "Circuit Breaker Details",
-                }}
-              />
-              <Stack.Screen
-                name="modal"
-                options={{
-                  presentation: "modal",
-                  title: "Standard Modal",
-                }}
-              />
-              <Stack.Screen
-                name="formsheet"
-                options={{
-                  presentation: "formSheet",
-                  title: "Form Sheet Modal",
-                  sheetGrabberVisible: true,
-                  sheetAllowedDetents: [0.5, 0.8, 1.0],
-                  sheetCornerRadius: 20,
-                }}
-              />
-              <Stack.Screen
-                name="transparent-modal"
-                options={{
-                  presentation: "transparentModal",
-                  headerShown: false,
-                }}
-              />
-            </Stack>
-            <SystemBars style={"auto"} />
-          </GestureHandlerRootView>
-        </WidgetProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="repository/[id]" />
+          </Stack>
+          <SystemBars style={"auto"} />
+        </GestureHandlerRootView>
       </ThemeProvider>
     </React.Fragment>
   );

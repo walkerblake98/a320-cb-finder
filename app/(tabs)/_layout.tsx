@@ -1,73 +1,99 @@
 
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Stack, useRouter, usePathname, useSegments } from 'expo-router';
-import SegmentedControl, { SegmentOption } from '@/components/SegmentedControl';
-import { colors } from '@/styles/commonStyles';
+import React from 'react';
+import { View, StyleSheet, Platform } from 'react-native';
+import { Tabs } from 'expo-router';
+import { IconSymbol } from '@/components/IconSymbol';
+import { useColorScheme } from 'react-native';
+import { getColors } from '@/styles/commonStyles';
 
 export default function TabLayout() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const segments = useSegments();
-  const [selectedTab, setSelectedTab] = useState('info');
-
-  const tabs: SegmentOption[] = [
-    { label: 'Info', value: 'info' },
-    { label: 'Search', value: 'search' },
-  ];
-
-  // Update selected tab based on current route
-  useEffect(() => {
-    console.log('Current pathname:', pathname);
-    console.log('Current segments:', segments);
-    
-    if (pathname.includes('/(home)') || pathname.includes('/home')) {
-      setSelectedTab('search');
-    } else if (pathname.includes('/profile')) {
-      setSelectedTab('info');
-    }
-  }, [pathname, segments]);
-
-  const handleTabChange = (value: string) => {
-    console.log('Tab changed to:', value);
-    
-    // Prevent navigation if already on the selected tab
-    if (value === selectedTab) {
-      console.log('Already on this tab, skipping navigation');
-      return;
-    }
-    
-    setSelectedTab(value);
-    
-    if (value === 'info') {
-      // Use replace instead of push to prevent stacking multiple screens
-      router.replace('/(tabs)/profile');
-    } else if (value === 'search') {
-      // Use replace instead of push to prevent stacking multiple screens
-      router.replace('/(tabs)/(home)/');
-    }
-  };
+  const colorScheme = useColorScheme();
+  const colors = getColors(colorScheme);
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <SegmentedControl
-          options={tabs}
-          selectedValue={selectedTab}
-          onValueChange={handleTabChange}
-        />
-      </View>
-      <Stack
+      <Tabs
         screenOptions={{
           headerShown: false,
-          animation: 'fade',
+          tabBarActiveTintColor: colors.primary,
+          tabBarInactiveTintColor: colors.textSecondary,
+          tabBarStyle: {
+            backgroundColor: colors.card,
+            borderTopColor: colors.border,
+            borderTopWidth: 1,
+            height: Platform.OS === 'ios' ? 88 : 60,
+            paddingBottom: Platform.OS === 'ios' ? 28 : 8,
+            paddingTop: 8,
+          },
+          tabBarLabelStyle: {
+            fontSize: 11,
+            fontWeight: '500',
+          },
         }}
-        initialRouteName="profile"
       >
-        <Stack.Screen name="profile" />
-        <Stack.Screen name="(home)" />
-        <Stack.Screen name="index" />
-      </Stack>
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Home',
+            tabBarIcon: ({ color, size }) => (
+              <IconSymbol
+                ios_icon_name="house.fill"
+                android_material_icon_name="home"
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="repositories"
+          options={{
+            title: 'Repositories',
+            tabBarIcon: ({ color, size }) => (
+              <IconSymbol
+                ios_icon_name="folder.fill"
+                android_material_icon_name="folder"
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="search"
+          options={{
+            title: 'Search',
+            tabBarIcon: ({ color, size }) => (
+              <IconSymbol
+                ios_icon_name="magnifyingglass"
+                android_material_icon_name="search"
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: 'Profile',
+            tabBarIcon: ({ color, size }) => (
+              <IconSymbol
+                ios_icon_name="person.fill"
+                android_material_icon_name="person"
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="(home)"
+          options={{
+            href: null,
+          }}
+        />
+      </Tabs>
     </View>
   );
 }
@@ -75,15 +101,5 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
-  },
-  header: {
-    backgroundColor: colors.card,
-    paddingTop: 16,
-    paddingBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.secondary + '20',
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.05)',
-    elevation: 2,
   },
 });
