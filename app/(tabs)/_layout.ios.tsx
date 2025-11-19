@@ -26,6 +26,12 @@ export default function TabLayout() {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    // Ensure we start on the Info page
+    console.log('Initial navigation to Info page');
+    router.replace('/(tabs)/profile');
+  }, []);
+
   const handleTabChange = (value: string) => {
     console.log('Tab changed to:', value);
     setSelectedTab(value);
@@ -50,6 +56,7 @@ export default function TabLayout() {
           headerShown: false,
           animation: 'fade',
         }}
+        initialRouteName="profile"
       >
         <Stack.Screen key="profile" name="profile" />
         <Stack.Screen key="home" name="(home)" />
