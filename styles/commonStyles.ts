@@ -1,20 +1,20 @@
 
 import { StyleSheet, useColorScheme } from 'react-native';
 
-// Function to get colors based on color scheme (GitHub-inspired)
+// Function to get colors based on color scheme
 export const getColors = (colorScheme: 'light' | 'dark' | null | undefined) => {
   const isDark = colorScheme === 'dark';
   
   return {
-    background: isDark ? '#0d1117' : '#f6f8fa',
-    text: isDark ? '#c9d1d9' : '#24292f',
-    textSecondary: isDark ? '#8b949e' : '#57606a',
-    primary: isDark ? '#58a6ff' : '#0969da',
-    secondary: isDark ? '#8b949e' : '#6e7781',
-    accent: isDark ? '#f78166' : '#cf222e',
-    card: isDark ? '#161b22' : '#ffffff',
-    highlight: isDark ? '#388bfd26' : '#ddf4ff',
-    border: isDark ? '#30363d' : '#d0d7de',
+    background: isDark ? '#000000' : '#f0f0f0',
+    text: isDark ? '#FFFFFF' : '#333333',
+    textSecondary: isDark ? '#AAAAAA' : '#777777',
+    primary: isDark ? '#0A84FF' : '#007BFF',
+    secondary: isDark ? '#8E8E93' : '#6C757D',
+    accent: isDark ? '#FFD60A' : '#FFC107',
+    card: isDark ? '#1C1C1E' : '#FFFFFF',
+    highlight: isDark ? '#FFD60A' : '#FFFF00',
+    border: isDark ? '#38383A' : '#E5E5E5',
   };
 };
 
