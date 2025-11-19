@@ -4,6 +4,20 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { colors } from "@/styles/commonStyles";
 
 export default function ProfileScreen() {
+  const panelLocations = [
+    { id: 'panel-1', title: '49 VU:', description: 'Cockpit Overhead Panel' },
+    { id: 'panel-2', title: '121 VU - 125 VU:', description: "Behind F/O's Seat" },
+    { id: 'panel-3', title: '105 E&E - 106 E&E:', description: 'Electronics & Equipment Bay' },
+    { id: 'panel-4', title: 'Fwd Cabin:', description: 'Forward Cabin Ceiling' },
+    { id: 'panel-5', title: 'Aft Cabin:', description: 'Aft Cabin Ceiling' },
+  ];
+
+  const howToSteps = [
+    { id: 'step-1', number: '1.', text: 'Enter the system name in the search bar' },
+    { id: 'step-2', number: '2.', text: 'Tap on a circuit breaker from the results' },
+    { id: 'step-3', number: '3.', text: 'View the panel location and coordinates' },
+  ];
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
@@ -22,58 +36,24 @@ export default function ProfileScreen() {
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Panel Locations</Text>
-          <View style={styles.listItem}>
-            <Text style={styles.bullet}>•</Text>
-            <Text style={styles.listText}>
-              <Text style={styles.bold}>49 VU:</Text> Cockpit Overhead Panel
-            </Text>
-          </View>
-          <View style={styles.listItem}>
-            <Text style={styles.bullet}>•</Text>
-            <Text style={styles.listText}>
-              <Text style={styles.bold}>121 VU - 125 VU:</Text> Behind F/O&apos;s Seat
-            </Text>
-          </View>
-          <View style={styles.listItem}>
-            <Text style={styles.bullet}>•</Text>
-            <Text style={styles.listText}>
-              <Text style={styles.bold}>105 E&E - 106 E&E:</Text> Electronics & Equipment Bay
-            </Text>
-          </View>
-          <View style={styles.listItem}>
-            <Text style={styles.bullet}>•</Text>
-            <Text style={styles.listText}>
-              <Text style={styles.bold}>Fwd Cabin:</Text> Forward Cabin Ceiling
-            </Text>
-          </View>
-          <View style={styles.listItem}>
-            <Text style={styles.bullet}>•</Text>
-            <Text style={styles.listText}>
-              <Text style={styles.bold}>Aft Cabin:</Text> Aft Cabin Ceiling
-            </Text>
-          </View>
+          {panelLocations.map((location) => (
+            <View key={location.id} style={styles.listItem}>
+              <Text style={styles.bullet}>•</Text>
+              <Text style={styles.listText}>
+                <Text style={styles.bold}>{location.title}</Text> {location.description}
+              </Text>
+            </View>
+          ))}
         </View>
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>How to Use</Text>
-          <View style={styles.listItem}>
-            <Text style={styles.number}>1.</Text>
-            <Text style={styles.listText}>
-              Enter the system name in the search bar
-            </Text>
-          </View>
-          <View style={styles.listItem}>
-            <Text style={styles.number}>2.</Text>
-            <Text style={styles.listText}>
-              Tap on a circuit breaker from the results
-            </Text>
-          </View>
-          <View style={styles.listItem}>
-            <Text style={styles.number}>3.</Text>
-            <Text style={styles.listText}>
-              View the panel location and coordinates
-            </Text>
-          </View>
+          {howToSteps.map((step) => (
+            <View key={step.id} style={styles.listItem}>
+              <Text style={styles.number}>{step.number}</Text>
+              <Text style={styles.listText}>{step.text}</Text>
+            </View>
+          ))}
         </View>
       </ScrollView>
     </View>
