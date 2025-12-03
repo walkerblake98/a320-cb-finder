@@ -1,14 +1,15 @@
+
 {
   "expo": {
     "name": "A320 CB Locator",
     "slug": "A320 CB Locator",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/natively-dark.png",
+    "icon": "./assets/images/28ccc65a-099f-4fbf-ab4d-670eee023b76.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/natively-dark.png",
+      "image": "./assets/images/28ccc65a-099f-4fbf-ab4d-670eee023b76.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -21,14 +22,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/natively-dark.png",
+        "foregroundImage": "./assets/images/28ccc65a-099f-4fbf-ab4d-670eee023b76.png",
         "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.anonymous.Natively"
     },
     "web": {
-      "favicon": "./assets/images/final_quest_240x240.png",
+      "favicon": "./assets/images/28ccc65a-099f-4fbf-ab4d-670eee023b76.png",
       "bundler": "metro"
     },
     "plugins": [
